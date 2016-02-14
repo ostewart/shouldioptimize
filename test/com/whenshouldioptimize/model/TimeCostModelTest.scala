@@ -9,7 +9,7 @@ class TimeCostModelTest extends FunSpec with Matchers {
       val model = new TaxFreeHourlyTimeCostModel(BigDecimal("100.00"), effectiveTaxRate)
       val taxMultiplier = BigDecimal(100) - effectiveTaxRate
 
-      model.calculate should contain("t2.nano" -> BigDecimal("100.00") * taxMultiplier / Ec2Pricing.all("t2.nano"))
+      model.calculate("t2.nano") should equal(TimeCostResult("t2.nano", Ec2Pricing.all("t2.nano"), BigDecimal("100.00") * taxMultiplier / Ec2Pricing.all("t2.nano")))
     }
   }
 }

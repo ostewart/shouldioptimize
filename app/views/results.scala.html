@@ -1,0 +1,34 @@
+@import com.whenshouldioptimize.model.TimeCostResult
+@(results: Iterable[TimeCostResult])
+
+@main("WhenShouldIOptimize?") {
+  <div class="container">
+    <h1>Are you going to save more than <span>@results.find(_.instanceType == "t2.large").get.hoursPerProgrammerHour.formatted("%,.0f")</span> hours of instance time?</h1>
+
+    <p>Then spend an hour optimizing. Otherwise, no.</p>
+    <div class="output">
+      <table>
+        <thead>
+          <tr>
+            <th>Instance Type</th>
+            <th>$/hour</th>
+            <th>Hours/Programmer Hour</th>
+          </tr>
+        </thead>
+        <tbody>
+        @defining(java.text.NumberFormat.getCurrencyInstance) { currencyFormat =>
+          @for( result <- results.toSeq.sortBy(_.instanceHourlyCost)) {
+            <tr>
+              <td>@result.instanceType</td>
+              <td>@result.instanceHourlyCost</td>
+              <td>@result.hoursPerProgrammerHour.formatted("%,.0f")</td>
+            </tr>
+          }
+        }
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+}
