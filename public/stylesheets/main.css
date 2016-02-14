@@ -1,10 +1,11 @@
 .upshot {
     text-align: center;
-    margin: 8em;
+    margin-top: 8em;
+    margin-bottom: 8em;
 }
 
 .output {
-    width: 40em;
+    max-width: 40em;
     margin-left: auto;
     margin-right: auto;
 }

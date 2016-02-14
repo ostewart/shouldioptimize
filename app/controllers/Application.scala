@@ -7,7 +7,7 @@ import play.api.mvc._
 class Application extends Controller {
 
   def index = Action {
-    Ok(views.html.results(new TaxFreeHourlyTimeCostModel(BigDecimal("100.00"), BigDecimal("33.964")).calculate.values))
+    Ok(views.html.results(new TaxFreeHourlyTimeCostModel(BigDecimal("42.88"), BigDecimal("33.964")).calculate.values))
   }
 
 }
