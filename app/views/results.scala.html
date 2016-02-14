@@ -3,16 +3,19 @@
 
 @main("WhenShouldIOptimize?") {
   <div class="container">
-    <h1>Are you going to save more than <span>@results.find(_.instanceType == "t2.large").get.hoursPerProgrammerHour.formatted("%,.0f")</span> hours of instance time?</h1>
+    <div class="upshot">
+      <h1>Are you going to save more than <span>@results.find(_.instanceType == "t2.large").get.hoursPerProgrammerHour.formatted("%,.0f")</span> hours of instance time?</h1>
 
-    <p>Then spend an hour optimizing. Otherwise, no.</p>
+      <p class="lead">Then spend an hour optimizing. Otherwise, maybe wait.</p>
+
+    </div>
     <div class="output">
-      <table>
+      <table class="table table-striped">
         <thead>
           <tr>
             <th>Instance Type</th>
             <th>$/hour</th>
-            <th>Hours/Programmer Hour</th>
+            <th class="programmer-hours">Hours/Programmer Hour</th>
           </tr>
         </thead>
         <tbody>
@@ -20,8 +23,8 @@
           @for( result <- results.toSeq.sortBy(_.instanceHourlyCost)) {
             <tr>
               <td>@result.instanceType</td>
-              <td>@result.instanceHourlyCost</td>
-              <td>@result.hoursPerProgrammerHour.formatted("%,.0f")</td>
+              <td>$@result.instanceHourlyCost</td>
+              <td class="programmer-hours">@result.hoursPerProgrammerHour.formatted("%,.0f")</td>
             </tr>
           }
         }
