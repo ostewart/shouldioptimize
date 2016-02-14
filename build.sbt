@@ -1,4 +1,4 @@
-name := """whenshouldioptimize"""
+name := """shouldioptimize"""
 
 version := "1.0-SNAPSHOT"
 

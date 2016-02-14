@@ -1,4 +1,4 @@
-package com.whenshouldioptimize.model
+package com.shouldioptimize.model
 
 case class TimeCostResult(instanceType: String, instanceHourlyCost: BigDecimal, hoursPerProgrammerHour: BigDecimal)
 

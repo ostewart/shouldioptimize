@@ -1,6 +1,6 @@
 package controllers
 
-import com.whenshouldioptimize.model.TaxFreeHourlyTimeCostModel
+import com.shouldioptimize.model.TaxFreeHourlyTimeCostModel
 import play.api._
 import play.api.mvc._
 

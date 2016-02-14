@@ -1,4 +1,4 @@
-package com.whenshouldioptimize.model
+package com.shouldioptimize.model
 
 object Ec2Pricing {
   val all = Map("t2.nano" -> "0.0065",

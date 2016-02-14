@@ -1,4 +1,4 @@
-package com.whenshouldioptimize.model
+package com.shouldioptimize.model
 
 import org.scalatest.{Matchers, FunSpec}
 

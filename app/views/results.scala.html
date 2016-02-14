@@ -1,7 +1,7 @@
-@import com.whenshouldioptimize.model.TimeCostResult
+@import com.shouldioptimize.model.TimeCostResult
 @(results: Iterable[TimeCostResult])
 
-@main("WhenShouldIOptimize?") {
+@main("Should I Optimize?") {
   <div class="container">
     <div class="upshot">
       <h1>Are you going to save more than <span>@results.find(_.instanceType == "t2.large").get.hoursPerProgrammerHour.formatted("%,.0f")</span> hours of instance time?</h1>
