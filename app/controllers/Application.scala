@@ -42,6 +42,10 @@ class Application @Inject()(val messagesApi: MessagesApi, cached: Cached) extend
     )
   }
 
-  def why = Action { Ok(views.html.why()) }
+  def why = cached.status(_ => "/why", OK, 60) {
+    Action {
+      Ok(views.html.why())
+    }
+  }
 
 }
