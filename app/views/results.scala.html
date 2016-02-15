@@ -1,12 +1,24 @@
 @import com.shouldioptimize.model.TimeCostResult
-@(results: Iterable[TimeCostResult])
+@import com.shouldioptimize.model.Ec2Pricing
+@import b3.inline.fieldConstructor
+
+@(results: Iterable[TimeCostResult], timeCostForm: Form[TimeCostInput])(implicit messages: Messages)
 
 @main("Should I Optimize?") {
   <div class="container">
     <div class="upshot">
-      <h1>Are you going to save more than <span>@results.find(_.instanceType == "t2.large").get.hoursPerProgrammerHour.formatted("%,.0f")</span> hours of instance time?</h1>
+      <h1>Are you going to save more than <span>@results.find(_.instanceType == timeCostForm("instanceType").value.getOrElse("t2.large")).get.hoursPerProgrammerHour.formatted("%,.0f")</span> hours of instance time?</h1>
 
       <p class="lead">Then spend an hour optimizing. Otherwise, maybe wait.</p>
+
+      <div class="form">
+        <p>Doesn't look right? Try your values:</p>
+        @b3.form(action = routes.Application.results) {
+          @b3.inputType("text", timeCostForm("hourlyRate"), '_label -> "Hourly Rate")
+          @b3.select(timeCostForm("instanceType"), Ec2Pricing.all.keys.map(k => (k,k)).toSeq, '_label -> "Instance Type")
+          @b3.submit('class -> "btn btn-primary") { Calculate }
+        }
+      </div>
 
     </div>
     <div class="output">
@@ -33,5 +45,14 @@
     </div>
   </div>
 
-
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- responsive -->
+  <ins class="adsbygoogle"
+  style="display:block"
+  data-ad-client="ca-pub-3553420280912760"
+  data-ad-slot="6846498006"
+  data-ad-format="auto"></ins>
+  <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
 }
