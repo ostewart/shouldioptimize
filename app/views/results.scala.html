@@ -15,7 +15,7 @@
         <p>Doesn't look right? Try your values:</p>
         @b3.form(action = routes.Application.results) {
           @b3.inputType("text", timeCostForm("hourlyRate"), '_label -> "Hourly Rate")
-          @b3.select(timeCostForm("instanceType"), Ec2Pricing.all.keys.map(k => (k,k)).toSeq, '_label -> "Instance Type")
+          @b3.select(timeCostForm("instanceType"), results.toSeq.sortBy(_.instanceHourlyCost).map(r => (r.instanceType,r.instanceType)), '_label -> "Instance Type")
           @b3.submit('class -> "btn btn-primary") { Calculate }
         }
       </div>
