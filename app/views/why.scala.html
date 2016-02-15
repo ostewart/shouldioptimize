@@ -1,0 +1,25 @@
+@main("Should I Optimize? - Why?") {
+  <div class="container">
+    <h1>What's all this about?</h1>
+    <h2>Background</h2>
+    <p>
+      Microbenchmarks and language wars are fun and all, but does it really matter whether you can calculate a
+      million things in 5 seconds or 0.5 seconds? Maybe. Most of the time, probably not. If you're wondering whether
+      you should spend time thinking about how to make your code faster or maybe spend that time making your code
+      easier to read and change later, you might think about how much it actually costs to simply throw processing
+      time at the problem.
+    </p>
+
+    <div class="text-center">
+      <a href="http://xkcd.com/1205/"><img src="http://imgs.xkcd.com/comics/is_it_worth_the_time.png"></a>
+    </div>
+
+    <h2>How it's calculated</h2>
+    <p>The hours in the headline are just <code>(programmerHourCost / instanceHourlyCost)</code> for the programmer
+      hour cost you input and the hourly cost of the instance type you select.
+      The hourly rate defaults to the equivalent hourly rate of the first plausible median programmer salary
+      I found on Google.</p>
+
+    <p><a href="@routes.Application.index()">Try it again.</a></p>
+  </div>
+}

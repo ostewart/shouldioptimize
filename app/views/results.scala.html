@@ -8,12 +8,12 @@
     <div class="upshot">
       <h1>Are you going to save more than <span>@results.find(_.instanceType == timeCostForm("instanceType").value.getOrElse("t2.large")).get.hoursPerProgrammerHour.formatted("%,.0f")</span> hours of instance time?</h1>
 
-      <p class="lead">Then spend an hour optimizing. Otherwise, maybe wait.</p>
+      <p class="lead">Then spend an hour optimizing. Otherwise, <a href="@routes.Application.why">maybe wait.</a></p>
 
       <div class="form">
         <p>Doesn't look right? Try your values:</p>
         @b3.form(action = routes.Application.results) {
-          @b3.inputWrapped("text", timeCostForm("hourlyRate"), '_label -> "Programmer Hour Cost", 'size -> 7) { input =>
+          @b3.inputWrapped("text", timeCostForm("programmerHourCost"), '_label -> "Programmer Hour Cost", 'size -> 7) { input =>
             <div class="input-group">
               <span class="input-group-addon">$</span>
               @input

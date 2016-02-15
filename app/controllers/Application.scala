@@ -10,7 +10,7 @@ import play.api.data.validation.{Constraint, Invalid, Valid, ValidationResult}
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc._
 
-case class TimeCostInput(hourlyRate: BigDecimal, instanceType: String)
+case class TimeCostInput(programmerHourCost: BigDecimal, instanceType: String)
 
 class Application @Inject()(val messagesApi: MessagesApi, cached: Cached) extends Controller with I18nSupport {
   val validInstanceType = Constraint[String] ({
@@ -20,11 +20,11 @@ class Application @Inject()(val messagesApi: MessagesApi, cached: Cached) extend
 
   val TimeCostInputForm = Form(
     mapping(
-      "hourlyRate" -> bigDecimal,
+      "programmerHourCost" -> bigDecimal,
       "instanceType" -> text.verifying(validInstanceType)
     )(TimeCostInput.apply)(TimeCostInput.unapply))
 
-  private val DefaultHourlyRate = BigDecimal("42.88")
+  private val DefaultProgrammerHourCost = BigDecimal("42.88")
   private val DefaultInstanceType = "t2.large"
   private val DefaultForm = TimeCostInputForm.fill(TimeCostInput(BigDecimal("42.88"), DefaultInstanceType))
 
@@ -37,9 +37,11 @@ class Application @Inject()(val messagesApi: MessagesApi, cached: Cached) extend
   def results = Action { request =>
     val form = TimeCostInputForm.bind(request.queryString.mapValues(_.head))
     form.fold(
-      formWithErrors => BadRequest(views.html.results(new PreTaxHourlyTimeCostModel(DefaultHourlyRate).calculate.values, formWithErrors)),
-      timeCostInput => Ok(views.html.results(new PreTaxHourlyTimeCostModel(timeCostInput.hourlyRate).calculate.values, form))
+      formWithErrors => BadRequest(views.html.results(new PreTaxHourlyTimeCostModel(DefaultProgrammerHourCost).calculate.values, formWithErrors)),
+      timeCostInput => Ok(views.html.results(new PreTaxHourlyTimeCostModel(timeCostInput.programmerHourCost).calculate.values, form))
     )
   }
+
+  def why = Action { Ok(views.html.why()) }
 
 }
