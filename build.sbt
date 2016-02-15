@@ -10,6 +10,7 @@ libraryDependencies ++= Seq(
   jdbc,
   cache,
   ws,
+  filters,
   specs2 % Test,
   "com.adrianhurt" %% "play-bootstrap3" % "0.4.5-P24",
   "org.scalatest" %% "scalatest" % "2.2.1" % Test,
