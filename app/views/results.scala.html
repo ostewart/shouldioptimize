@@ -1,6 +1,5 @@
-@import com.shouldioptimize.model.TimeCostResult
-@import com.shouldioptimize.model.Ec2Pricing
 @import b3.inline.fieldConstructor
+@import com.shouldioptimize.model.TimeCostResult
 
 @(results: Iterable[TimeCostResult], timeCostForm: Form[TimeCostInput])(implicit messages: Messages)
 
@@ -14,7 +13,12 @@
       <div class="form">
         <p>Doesn't look right? Try your values:</p>
         @b3.form(action = routes.Application.results) {
-          @b3.inputType("text", timeCostForm("hourlyRate"), '_label -> "Hourly Rate")
+          @b3.inputWrapped("text", timeCostForm("hourlyRate"), '_label -> "Programmer Hour Cost", 'size -> 7) { input =>
+            <div class="input-group">
+              <span class="input-group-addon">$</span>
+              @input
+            </div>
+          }
           @b3.select(timeCostForm("instanceType"), results.toSeq.sortBy(_.instanceHourlyCost).map(r => (r.instanceType,r.instanceType)), '_label -> "Instance Type")
           @b3.submit('class -> "btn btn-primary") { Calculate }
         }
@@ -26,8 +30,8 @@
         <thead>
           <tr>
             <th>Instance Type</th>
-            <th>$/hour</th>
-            <th class="programmer-hours">Hours/Programmer Hour</th>
+            <th><a href="https://aws.amazon.com/ec2/pricing/">Cost</a>/Hour</th>
+            <th class="programmer-hours">Time/Programmer Hour</th>
           </tr>
         </thead>
         <tbody>
@@ -36,7 +40,7 @@
             <tr>
               <td>@result.instanceType</td>
               <td>$@result.instanceHourlyCost</td>
-              <td class="programmer-hours">@result.hoursPerProgrammerHour.formatted("%,.0f")</td>
+              <td class="programmer-hours">@result.hoursPerProgrammerHour.formatted("%,.0f") hours</td>
             </tr>
           }
         }
